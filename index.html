@@ -19,7 +19,7 @@
     </head>
     <body class = "bg-gradient-to-br from-purple-200 to-blue-100 min-h-screen font-sans p-4">
         
-        <!--Modal Container-->
+        <!-- Name Modal Container-->
         <div id = "name-modal" class = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
             <div class = "bg-white p-6 rounded-xl shadow-lg w-80 text-center">
                 <h2 class = "text-xl font-semibold mb-4">Welcome !</h2>
@@ -28,13 +28,24 @@
                 <button onclick = "submitName()" class = "bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition">Submit</button>
             </div>
         </div>
+
+        <!--Edit Task Modal-->
+        <div id = "edit-modal" class = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+            <div class = "bg-white p-6 rounded-xl shadow-lg w-80 text-center">
+                <h2 class = "text-xl font-semibold mb-4">Edit Task</h2>
+                <input id = "edit-input" type = "text" class = "w-full border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus: ring-2 focus: ring-purple-500"/>
+                <button onclick = "submitEdit()" class = "bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition">Submit</button>
+            </div>
+        </div>
+        
         <div class = " max-w-2xl mx-auto mt-10 bg-white/70 backdrop-blur-md rounded-2xl shadow-xl p-6 space-y-6">
+
         <!--Greeting-->
         <h1 id = "greeting" class = "text-3xl font-bold text-center text-gray-800 transition-all duration-500"></h1>
         <div class = "text-center mt-2">
             <button onclick = "changeName()" class = "text-sm text-purple-600 hover:underline">Change Name</button>
         </div>
-
+        
         <!--Task Input-->
         <div class = "flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-3 sm:space-y-0">
             <input

@@ -17,7 +17,6 @@ const quotes = [
 
 window.onload = function() {
     getUsername();
-    renderGreeting();
     renderTasks();
     showMotivationalQuote();
 };
@@ -90,12 +89,9 @@ function deleteTask(id){
 }
 
 function editTask(id){
-    const task = tasks.find(t => t.id === id);
-    const newText = prompt("Edit your task:",task.text);
-    if(newText !== null){
-        task.text = newText;
-        saveTasks();
-        renderTasks();
+    const taskElement = document.querySelector(`[data-id="${id}"]`);
+    if(taskElement){
+        openEditModal(taskElement);
     }
 }
 
@@ -115,7 +111,7 @@ function renderTasks(){
         item.innerHTML = `
             <div class = "flex items-center">
               <label class = "flex items-center cursor-pointer space-x-2">
-              <input type = "checkbox" class = "peer hidden" onchange = "toggleTaskComplete(${task.id})"${task.completed ? "checked" : ""} />
+              <input type = "checkbox" class = "peer hidden" onchange = "toggleTaskComplete(${task.id})" ${task.completed ? "checked" : ""} />
               <div class = "w-5 h-5 rounded-full border-2 border-purple-500 peer-checked:bg-purple-500 transition-all"></div>
               <span class = " ${task.completed ? " line-through  text-gray-500" : ""}">${task.text}</span>
               </label>
@@ -126,6 +122,30 @@ function renderTasks(){
                 `;
                 list.appendChild(item);
     });
+}
+
+let taskBeingEdited = null;
+
+function openEditModal(taskElement){
+    document.getElementById("edit-input").value = "";
+    document.getElementById("edit-modal").classList.remove("hidden");
+    taskBeingEdited = taskElement;
+    setTimeout(() => document.getElementById("edit-input").focus(), 100);
+}
+
+function submitEdit(){
+    const newText = document.getElementById("edit-input").value.trim();
+    if(newText && taskBeingEdited){
+        const id = parseInt(taskBeingEdited.getAttribute("data-id"));
+        const task = tasks.find(t => t.id === id);
+        if(task){
+            task.text = newText;
+            saveTasks();
+        }
+        taskBeingEdited.querySelector("span").innerText = newText;
+        taskBeingEdited = null;
+        document.getElementById("edit-modal").classList.add("hidden");
+    }
 }
 
 function showMotivationalQuote(){
@@ -141,8 +161,10 @@ document.getElementById("task-input").addEventListener("keydown",function(event)
         addTask(this.value);
     }
 });
+
 document.addEventListener("DOMContentLoaded",() => {
     const nameInput = document.getElementById("name-input");
+    const editInput = document.getElementById("edit-input");
 
     nameInput.addEventListener("keydown",function(event){
         if(event.key === "Enter"){
@@ -150,9 +172,15 @@ document.addEventListener("DOMContentLoaded",() => {
         }
     });
 
+    editInput.addEventListener("keydown",function(event){
+        if(event.key === "Enter"){
+            submitEdit();
+        }
+    });
+
     const storedName = localStorage.getItem("username");
     if(storedName){
-        document.getElementById("greeting").textContent = `Hello, ${storedname}`;
+        document.getElementById("greeting").textContent = `Hello, ${storedName}`;
     }else {
         document.getElementById("name-modal").classList.remove("hidden");
     }
