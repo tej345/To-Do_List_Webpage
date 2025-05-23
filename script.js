@@ -31,6 +31,13 @@ function getUsername(){
     }
 }
 
+function changeName(){
+    localStorage.removeItem('username');
+    document.getElementById("name-input").value = "";
+    user = null;
+    getUsername();
+}
+
 function submitName(){
     const input = document.getElementById("name-input");
     const name = input.value.trim();
@@ -127,8 +134,26 @@ function showMotivationalQuote(){
     document.getElementById("quote-img").src = random.image;
 }
 
+//event listeners go here
+
 document.getElementById("task-input").addEventListener("keydown",function(event) {
     if (event.key == "Enter"){
         addTask(this.value);
+    }
+});
+document.addEventListener("DOMContentLoaded",() => {
+    const nameInput = document.getElementById("name-input");
+
+    nameInput.addEventListener("keydown",function(event){
+        if(event.key === "Enter"){
+            submitName();
+        }
+    });
+
+    const storedName = localStorage.getItem("username");
+    if(storedName){
+        document.getElementById("greeting").textContent = `Hello, ${storedname}`;
+    }else {
+        document.getElementById("name-modal").classList.remove("hidden");
     }
 });
