@@ -57,12 +57,13 @@ function addTask(text) {
 function toggleTaskComplete(id) {
     const taskElement = document.querySelector(`[data-id="${id}"]`);
     if (taskElement) {
+        taskElement.offsetWidth;
         taskElement.classList.add("fade-out");
         setTimeout(() => {
             tasks = tasks.filter(task => task.id !== id);
             saveTasks();
             renderTasks();
-        }, 500); // match with CSS transition duration
+        }, 550);
     }
 }
 
