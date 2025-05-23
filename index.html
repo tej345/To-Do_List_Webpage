@@ -6,6 +6,13 @@
         <title> To-Do List</title>
         <script src = "https://cdn.tailwindcss.com"></script>
         <script src = "script.js" defer></script>
+        <style>
+            .fade-out {
+                opacity: 0;
+                transform: translateX(50px);
+                transition: opacity 0.5s ease, transform 0.5s ease;
+            }
+            </style>            
     </head>
     <body class = "bg-gradient-to-br from-purple-200 to-blue-100 min-h-screen font-sans p-4">
         <div class = " max-w-2xl mx-auto mt-10 bg-white/70 backdrop-blur-md rounded-2xl shadow-xl p-6 space-y-6">

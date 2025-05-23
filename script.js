@@ -55,9 +55,16 @@ function addTask(text) {
     document.getElementById("task-input").value = "";
 }
 
-function toggleTaskComplete(id){
-    deleteTask(id);
-    
+function toggleTaskComplete(id) {
+    const taskElement = document.querySelector(`[data-id="${id}"]`);
+    if (taskElement) {
+        taskElement.classList.add("fade-out");
+        setTimeout(() => {
+            tasks = tasks.filter(task => task.id !== id);
+            saveTasks();
+            renderTasks();
+        }, 500); // match with CSS transition duration
+    }
 }
 
 function deleteTask(id){
@@ -87,9 +94,9 @@ function renderTasks(){
 
     tasks.forEach(task => {
         const item = document.createElement("div");
-        item.className = 
-          "flex items-center justify-between bg-white p-3 rounded-lg shadow mb-2 transition-all";
-          item.innerHTML = `
+        item.className = "flex items-center justify-between bg-white p-3 rounded-lg shadow mb-2 transition-all";
+        item.setAttribute("data-id",task.id);
+        item.innerHTML = `
             <div class = "flex items-center">
               <input type = "checkbox" ${task.completed ? "checked" : ""} onchange = "toggleTaskComplete(${task.id})">
               <span class = " ${task.completed ? " line-through  text-gray-500" : ""}">${task.text}</span>
