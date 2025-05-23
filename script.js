@@ -34,7 +34,6 @@ function getUsername(){
 }
 
 function renderGreeting(){
-
     document.getElementById('greeting').textContent = `Hi ${user}, let's crush your tasks!`;
 }
 
@@ -114,3 +113,9 @@ function showMotivationalQuote(){
     document.getElementById("quote").textContent = `"${random.text}"`;
     document.getElementById("quote-img").src = random.image;
 }
+
+document.getElementById("task-input").addEventListener("keydown",function(event) {
+    if (event.key == "Enter"){
+        addTask(this.value);
+    }
+});
