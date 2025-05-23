@@ -97,8 +97,11 @@ function renderTasks(){
         item.setAttribute("data-id",task.id);
         item.innerHTML = `
             <div class = "flex items-center">
-              <input type = "checkbox" ${task.completed ? "checked" : ""} onchange = "toggleTaskComplete(${task.id})">
+              <label class = "flex items-center cursor-pointer space-x-2">
+              <input type = "checkbox" class = "peer hidden" onchange = "toggleTaskComplete(${task.id})"${task.completed ? "checked" : ""} />
+              <div class = "w-5 h-5 rounded-full border-2 border-purple-500 peer-checked:bg-purple-500 transition-all"></div>
               <span class = " ${task.completed ? " line-through  text-gray-500" : ""}">${task.text}</span>
+              </label>
               </div>
               <div class = "space-x-2">
                 <button onclick = "editTask(${task.id})" class = " text-blue-500 hover:underline">Edit</button>
