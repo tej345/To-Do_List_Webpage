@@ -56,11 +56,8 @@ function addTask(text) {
 }
 
 function toggleTaskComplete(id){
-    tasks = tasks.map(task =>
-      task.id === id ? { ...task, completed: !task.completed} : task   
-    );
-    saveTasks();
-    renderTasks();
+    deleteTask(id);
+    
 }
 
 function deleteTask(id){
@@ -99,7 +96,6 @@ function renderTasks(){
               </div>
               <div class = "space-x-2">
                 <button onclick = "editTask(${task.id})" class = " text-blue-500 hover:underline">Edit</button>
-                <button onclick = "deleteTask(${task.id})" class = " text-red-500 hover:underline">Delete</button>
                 </div>
                 `;
                 list.appendChild(item);
