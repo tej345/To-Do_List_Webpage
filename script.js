@@ -23,13 +23,22 @@ window.onload = function() {
 };
 
 function getUsername(){
-
     if(!user){
-        const name = prompt("Enter your name.");
-        if(name){
-            user = name;
-            localStorage.setItem('username',user);
-        }
+        document.getElementById("name-modal").classList.remove("hidden");
+        setTimeout(() => document.getElementById("name-input").focus(),100);
+    } else {
+        renderGreeting();
+    }
+}
+
+function submitName(){
+    const input = document.getElementById("name-input");
+    const name = input.value.trim();
+    if(name){
+        user = name;
+        localStorage.setItem('username',user);
+        document.getElementById("name-modal").classList.add("hidden");
+        renderGreeting();
     }
 }
 
