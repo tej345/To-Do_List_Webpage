@@ -1,6 +1,6 @@
 To-Do List Web App
 
-A clean, interactive to-do list web app that helps users manage tasks efficiently — built with HTML, CSS, and JavaScript. Features a smooth user experience, dynamic task management, and motivational quotes/images for an inspiring productivity boost.
+A clean, interactive to-do list web app that helps users manage tasks efficiently. 
 
 Features
 
